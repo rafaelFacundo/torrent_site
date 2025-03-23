@@ -9,7 +9,8 @@ type DescriptionElementProps = {
 };
 
 const ContainerDiv = styled.div`
-  width: 50%;
+  width: 850px;
+  flex-shrink: 0;
   height: 400px;
   background-color: black;
   display: flex;
@@ -78,75 +79,11 @@ const MovieImageBackground = styled.div<BackgroundImageComponentProps>`
   background-position: center;
 `;
 
-const HighLightMovie: React.FC = () => {
-  const movie = {
-    id: 65758,
-    url: "https://yts.mx/movies/family-gbese-2024",
-    imdb_code: "tt34425033",
-    title: "Family Gbese",
-    title_english: "Family Gbese",
-    title_long: "Family Gbese (2024)",
-    slug: "family-gbese-2024",
-    year: 2024,
-    rating: 0,
-    runtime: 0,
-    genres: ["Comedy", "Drama"],
-    summary: "",
-    description_full: "",
-    synopsis:
-      "Mazi's life is on fire, he got engaged to his dream girl and landed a promotion at his high-powered investment firm. Everything is going perfectly, until his mentor drops a bombshell request that threatens to blow up all his carefully crafted plans.",
-    yt_trailer_code: "",
-    language: "en",
-    mpa_rating: "",
-    background_image:
-      "https://yts.mx/assets/images/movies/family_gbese_2024/background.jpg",
-    background_image_original:
-      "https://yts.mx/assets/images/movies/family_gbese_2024/background.jpg",
-    small_cover_image:
-      "https://yts.mx/assets/images/movies/family_gbese_2024/small-cover.jpg",
-    medium_cover_image:
-      "https://yts.mx/assets/images/movies/family_gbese_2024/medium-cover.jpg",
-    large_cover_image:
-      "https://yts.mx/assets/images/movies/family_gbese_2024/large-cover.jpg",
-    state: "ok",
-    torrents: [
-      {
-        url: "https://yts.mx/torrent/download/3734F9EB640A9D9E1BD09E004FC07C0799FAB591",
-        hash: "3734F9EB640A9D9E1BD09E004FC07C0799FAB591",
-        quality: "720p",
-        type: "web",
-        is_repack: "0",
-        video_codec: "x264",
-        bit_depth: "8",
-        audio_channels: "2.0",
-        seeds: 100,
-        peers: 60,
-        size: "811.25 MB",
-        size_bytes: 850657280,
-        date_uploaded: "2024-12-31 04:03:40",
-        date_uploaded_unix: 1735614220,
-      },
-      {
-        url: "https://yts.mx/torrent/download/67330EDEE80E8A92EDBC27D67024A984C9F0F858",
-        hash: "67330EDEE80E8A92EDBC27D67024A984C9F0F858",
-        quality: "1080p",
-        type: "web",
-        is_repack: "0",
-        video_codec: "x264",
-        bit_depth: "8",
-        audio_channels: "2.0",
-        seeds: 0,
-        peers: 0,
-        size: "1.47 GB",
-        size_bytes: 1578400481,
-        date_uploaded: "2024-12-31 05:06:42",
-        date_uploaded_unix: 1735618002,
-      },
-    ],
-    date_uploaded: "2024-12-31 04:03:40",
-    date_uploaded_unix: 1735614220,
-  };
+type HighLightMovieProps = {
+  movie: any;
+};
 
+const HighLightMovie: React.FC<HighLightMovieProps> = ({ movie }) => {
   return (
     <ContainerDiv>
       <DescriptionAndImageDiv>
