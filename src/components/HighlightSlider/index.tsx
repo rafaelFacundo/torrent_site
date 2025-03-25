@@ -15,14 +15,16 @@ const Container = styled.div`
 const SliderContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   overflow-x: hidden;
-  padding-top: 100px;
+  padding-top: 150px;
   padding-bottom: 100px;
   background-color: black;
   gap: 150px;
   position: relative;
   width: 100%;
+  padding-left: 850px;
+  padding-right: 850px;
 `;
 
 const IndexPointsContainer = styled.div`
@@ -51,57 +53,51 @@ const IndexPointsElement = styled.button`
 
 const HighlightSlider: React.FC<HighlightSliderProps> = ({ moviesList }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
-  const [centerindex, setCenterIndex] = useState(0);
+  const movieCardsRef = useRef<HTMLElement[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  /* useEffect(() => {
-    const handleScroll = () => {
-      console.log("LAKSDjlskj");
-      const slider = sliderRef.current;
-      if (!slider) return;
+  useEffect(() => {}, [movieCardsRef]);
 
-      const { scrollLeft, offsetWidth } = slider;
-      const centerPosition = scrollLeft + offsetWidth / 2;
-
-      let closestIndex = 0;
-      let closestDistance = Infinity;
-
-      slider.childNodes.forEach((child, index) => {
-        const element = child as HTMLElement;
-        const elementCenter = element.offsetLeft + element.offsetWidth / 2;
-        const distance = Math.abs(centerPosition - elementCenter);
-
-        if (distance - closestDistance) {
-          closestDistance = distance;
-          closestIndex = index;
-        }
-
-        setCenterIndex(closestIndex);
-      });
-    };
-
+  useEffect(() => {
     const slider = sliderRef.current;
-    if (slider) {
-      slider.addEventListener("scroll", handleScroll);
+    const moviesCardsRefs = movieCardsRef.current;
+    if (slider && moviesCardsRefs) {
+      slider.scrollTo({
+        left: 850 - moviesCardsRefs[0].clientWidth / 2,
+        behavior: "smooth",
+      });
     }
-    () => {
-      slider?.removeEventListener("scroll", handleScroll);
-    };
-  }, []); */
+    setCurrentIndex(0);
+  }, [movieCardsRef]);
 
-  const handleScroll = () => {
-    console.log("AAAAAAAAA");
+  const handleScroll = (movieIndex: number) => {
+    const slider = sliderRef.current;
+    const moviesCardsRefs = movieCardsRef.current;
+    if (slider && moviesCardsRefs) {
+      sliderRef.current.scrollTo({
+        left: (movieIndex + 1) * 850 - moviesCardsRefs[0].clientWidth / 2,
+        behavior: "smooth",
+      });
+      setCurrentIndex(movieIndex);
+    }
   };
 
   return (
     <Container>
-      <SliderContainer ref={sliderRef} onScroll={handleScroll}>
-        {moviesList.map((movie) => (
-          <HighLightMovie movie={movie} />
+      <SliderContainer ref={sliderRef}>
+        {moviesList.map((movie, index) => (
+          <HighLightMovie
+            doesItScale={index === currentIndex}
+            movie={movie}
+            ref={(el: HTMLDivElement) => (movieCardsRef.current[index] = el)}
+          />
         ))}
       </SliderContainer>
       <IndexPointsContainer>
         {moviesList.map((_, index) => (
-          <IndexPointsElement></IndexPointsElement>
+          <IndexPointsElement
+            onClick={() => handleScroll(index)}
+          ></IndexPointsElement>
         ))}
       </IndexPointsContainer>
     </Container>

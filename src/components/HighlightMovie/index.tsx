@@ -1,3 +1,4 @@
+import React, { forwardRef } from "react";
 import styled from "styled-components";
 
 type BackgroundImageComponentProps = {
@@ -8,7 +9,11 @@ type DescriptionElementProps = {
   fontSize: string;
 };
 
-const ContainerDiv = styled.div`
+type ContainerDivProps = {
+  scale: boolean;
+};
+
+const ContainerDiv = styled.div<ContainerDivProps>`
   width: 850px;
   flex-shrink: 0;
   height: 400px;
@@ -17,9 +22,11 @@ const ContainerDiv = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 20px;
+  transform: ${(props) => (props.scale ? "scale(1.2)" : "scale(0.7) ")};
   &:hover {
     cursor: pointer;
   }
+  transition: 0.5s all ease;
 `;
 const MovieDescriptionDiv = styled.div`
   height: 100%;
@@ -81,11 +88,12 @@ const MovieImageBackground = styled.div<BackgroundImageComponentProps>`
 
 type HighLightMovieProps = {
   movie: any;
+  doesItScale: boolean;
 };
 
-const HighLightMovie: React.FC<HighLightMovieProps> = ({ movie }) => {
-  return (
-    <ContainerDiv>
+const HighLightMovie = forwardRef<HTMLDivElement, HighLightMovieProps>(
+  ({ movie, doesItScale }, ref) => (
+    <ContainerDiv ref={ref} scale={doesItScale}>
       <DescriptionAndImageDiv>
         <MovieDescriptionDiv>
           <MovieImageBackground
@@ -112,7 +120,7 @@ const HighLightMovie: React.FC<HighLightMovieProps> = ({ movie }) => {
         />
       </DescriptionAndImageDiv>
     </ContainerDiv>
-  );
-};
+  )
+);
 
 export default HighLightMovie;
