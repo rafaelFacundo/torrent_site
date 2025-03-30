@@ -6,6 +6,7 @@ import App from "./App.tsx";
 import GlobalStyles from "./theme/globalStyles.ts";
 import { store } from "./store/index.ts";
 import { Provider } from "react-redux";
+import "./App.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

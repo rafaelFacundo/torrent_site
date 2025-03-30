@@ -16,7 +16,7 @@ const DivContainer = styled.div<HeaderStyleProps>`
   transition: all 1s;
   display: flex;
   align-items: center;
-  justify-content: ${(props) => (props.isloading ? "center" : "flex-start")};
+  justify-content: center;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -102,14 +102,6 @@ const Header: React.FC = () => {
         alt={"Logo of the site"}
         isloading={loadingValue}
       />
-      {headerContainerHeight === 100 && (
-        <OptionsList>
-          <Option>Search by year</Option>
-          <Option>Search by genres</Option>
-          <Option>Search by name</Option>
-          <Option>All movies</Option>
-        </OptionsList>
-      )}
     </DivContainer>
   );
 };

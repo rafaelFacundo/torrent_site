@@ -7,7 +7,11 @@ const GlobalStyles = createGlobalStyle`
     }
     body {
         background-color: ${({theme}) => theme.background};
+        
     }
+    body::-webkit-scrollbar {
+            display: none;
+        }
 `
 
 export default GlobalStyles;

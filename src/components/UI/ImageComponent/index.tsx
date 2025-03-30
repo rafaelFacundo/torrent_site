@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-const Div = styled.div``;
+const Div = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 const Image = styled.img`
   width: 100%;
@@ -10,7 +13,7 @@ const Image = styled.img`
 
 type ImageComponentProps = {
   alt: string;
-  styles: React.CSSProperties;
+  styles?: React.CSSProperties;
   source: string;
 };
 
